@@ -2,12 +2,19 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "node_modules/rollup/bin/rollup -c --environment NODE_ENV:production",
-    "watch": "node_modules/npm-run-all/bin/npm-run-all --parallel watch:*",
-    "build:assets": "rsync -r ./web/static/assets/ ./priv/static",
-    "build:js": "node_modules/rollup/bin/rollup -c",
-    "watch:js": "node_modules/rollup/bin/rollup -c -w",
-    "build": "npm run build:js && npm run build:css"
+    "deploy": "node_modules/npm-run-all/bin/npm-run-all/index.js --parallel build:*",
+
+    "watch": "node_modules/npm-run-all/bin/npm-run-all/index.js --parallel watch:*",
+
+    "watch:appjs": "node_modules/rollup/bin/rollup -c config/rollup.config.app.js -w",
+    "watch:recorderjs": "node_modules/rollup/bin/rollup -c config/rollup.config.recorder.js -w",
+
+    "watch:assets": "node_modules/watch/cli.js 'npm run build:assets' ./web/static/assets",
+
+    "build": "node_modules/npm-run-all/bin/npm-run-all/index.js --parallel build:*",
+    "build:appjs": "node_modules/rollup/bin/rollup -c config/rollup.config.app.js --environment NODE_ENV:production",
+    "build:recorderjs": "node_modules/rollup/bin/rollup -c config/rollup.config.recorder.js --environment NODE_ENV:production",
+    "build:assets": "rsync -r ./web/static/assets/ ./priv/static"
   },
   "dependencies": {
     "phoenix": "file:deps/phoenix",
@@ -18,6 +25,7 @@
     "autoprefixer": "^6.3",
     "cssnano": "^3.10.0",
     "npm-run-all": "^4.0.2",
+    "postcss-cli": "^4.0.0",
     "precss": "^1.4.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
@@ -25,6 +33,7 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.1",
-    "rollup-watch": "^3.2.2"
+    "rollup-watch": "^3.2.2",
+    "watch": "^1.0.2"
   }
 }
