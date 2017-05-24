@@ -4,7 +4,8 @@
     <%= render SignDict.SharedView, "header.html", conn: @conn,
             current_user: @current_user,
             ogtags: assigns[:ogtags],
-            title: assigns[:title] %>
+            title: assigns[:title],
+            appjs: false %>
 
     <script src="<%= static_path(@conn, "/js/recorder.js") %>"></script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/components.css") %>">

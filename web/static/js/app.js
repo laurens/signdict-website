@@ -22,3 +22,5 @@ import "phoenix_html"
 
 var Turbolinks = require("turbolinks")
 Turbolinks.start()
+
+console.log("app.js loaded");
